@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Link, Redirect } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
 import Home from "./containers/Home";
@@ -100,8 +100,13 @@ class App extends Component {
             />
             <Route
               path="/publish"
-              getUser={this.getUser}
-              render={props => <Publish {...props} />}
+              render={props => {
+                if (this.state.token) {
+                  return <Publish getUser={this.getUser} {...props} />;
+                } else {
+                  return <Redirect to="/sign_up" />;
+                }
+              }}
             />
           </Switch>
         </>
