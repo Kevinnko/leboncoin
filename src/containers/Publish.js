@@ -33,7 +33,7 @@ class Publish extends React.Component {
     event.preventDefault();
 
     const response = await axios.post(
-      "http://localhost:3100/publish",
+      "https://leboncoin-copycat.herokuapp.com/publish",
       {
         title: this.state.title,
         description: this.state.description,
@@ -101,7 +101,7 @@ class Publish extends React.Component {
           <button
             onClick={async () => {
               const response = await axios.post(
-                "http://localhost:3100/publish",
+                "https://leboncoin-copycat.herokuapp.com/publish",
                 {
                   file: this.state.files[0]
                 },

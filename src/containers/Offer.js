@@ -16,7 +16,7 @@ class Offer extends React.Component {
             <div className="offer-body">
               <div className="card">
                 <img
-                  src="https://saplimoges.fr/wp-content/uploads/M104mr.png"
+                  src="https://res.cloudinary.com/kevin-reacteur/image/upload/v1550767037/images/leboncoin/ZXURu3DiOWjevSuP.jpg"
                   className="card-img-top"
                   alt="sombrero"
                 />
