@@ -16,10 +16,7 @@ class Header extends React.Component {
               <div className="menu">Offres</div>
             </div>
 
-            <div className="header-right">
-              <div className="login">Créer un compte</div>
-              <div className="login">Se connecter</div>
-            </div>
+            <div className="header-right">{this.props.renderNav()}</div>
           </div>
         </div>
       </>
