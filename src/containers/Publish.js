@@ -33,7 +33,7 @@ class Publish extends React.Component {
     event.preventDefault();
 
     const response = await axios.post(
-      "https://leboncoin-copycat.herokuapp.com/publish",
+      " https://leboncoin-api.herokuapp.com/api/offer/publish", // api de farid
       {
         title: this.state.title,
         description: this.state.description,
@@ -101,9 +101,12 @@ class Publish extends React.Component {
           <button
             onClick={async () => {
               const response = await axios.post(
-                "https://leboncoin-copycat.herokuapp.com/publish",
+                " https://leboncoin-api.herokuapp.com/api/offer/publish", // api de farid
                 {
-                  file: this.state.files[0]
+                  title: this.state.title,
+                  description: this.state.description,
+                  file: this.state.files[0],
+                  price: Number(this.state.price)
                 },
                 {
                   headers: {

@@ -10,7 +10,7 @@ class LogIn extends React.Component {
   handleSubmit = async event => {
     event.preventDefault();
     const response = await axios.post(
-      "https://leboncoin-copycat.herokuapp.com/log_in",
+      "https://leboncoin-api.herokuapp.com/api/user/log_in", // api de farid
       {
         email: this.state.email,
         password: this.state.password
