@@ -11,7 +11,7 @@ class Publish extends React.Component {
   };
 
   handleFiles = files => {
-    console.log(files);
+    // console.log(files);
     const newFiles = [...this.state.files, ...files.base64];
     this.setState({
       files: newFiles
@@ -38,7 +38,7 @@ class Publish extends React.Component {
         title: this.state.title,
         description: this.state.description,
         price: Number(this.state.price),
-        file: this.state.files[0]
+        files: this.state.files
       },
       {
         headers: {
@@ -46,6 +46,10 @@ class Publish extends React.Component {
         }
       }
     );
+    if (response.data) {
+      this.props.history.push(`/offer/${response.data._id}`);
+    }
+    console.log("response data :", response.data);
   };
 
   render() {
@@ -98,28 +102,6 @@ class Publish extends React.Component {
           </ReactFileReader>
 
           {filesArray}
-          <button
-            onClick={async () => {
-              const response = await axios.post(
-                " https://leboncoin-api.herokuapp.com/api/offer/publish", // api de farid
-                {
-                  title: this.state.title,
-                  description: this.state.description,
-                  file: this.state.files[0],
-                  price: Number(this.state.price)
-                },
-                {
-                  headers: {
-                    authorization: "Bearer " + this.props.getUser().token
-                  }
-                }
-              );
-
-              console.log(response.data);
-            }}
-          >
-            Send file
-          </button>
 
           <input type="submit" value="Publier" />
         </form>

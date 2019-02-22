@@ -1,5 +1,7 @@
 import React from "react";
 import Axios from "axios";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
 
 class Offer extends React.Component {
   state = {
@@ -7,6 +9,7 @@ class Offer extends React.Component {
     isLoading: true
   };
   render() {
+    console.log("offer ", this.state.offer);
     if (this.state.isLoading === true) {
       return <p>Page en cours de chargement</p>;
     } else {
@@ -15,14 +18,23 @@ class Offer extends React.Component {
           <div className="container d-flex">
             <div className="offer-body">
               <div className="card">
-                <img
-                  src="https://res.cloudinary.com/kevin-reacteur/image/upload/v1550767037/images/leboncoin/ZXURu3DiOWjevSuP.jpg"
-                  className="card-img-top"
-                  alt="sombrero"
-                />
+                <Carousel>
+                  {this.state.offer.pictures.map(pic => {
+                    return (
+                      <img
+                        key={pic.public_id}
+                        src={pic.secure_url}
+                        className=""
+                        style={{ objectFit: "contain" }}
+                        alt="annonce"
+                      />
+                    );
+                  })}
+                </Carousel>
+
                 <div className="card-body">
                   <p>{this.state.offer.title}</p>
-                  <p>{this.state.offer.price}</p>
+                  <p>{this.state.offer.price + " €"}</p>
                 </div>
               </div>
               <h3>Description</h3>

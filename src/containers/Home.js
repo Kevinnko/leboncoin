@@ -23,7 +23,7 @@ class Home extends React.Component {
         count: count
       },
       () => {
-        console.log("ici", this.state.currentPageOffers);
+        // console.log("ici", this.state.currentPageOffers);
       }
     );
   };

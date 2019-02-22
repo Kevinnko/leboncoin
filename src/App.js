@@ -15,14 +15,14 @@ class App extends Component {
     userEmail: Cookies.get("userEmail") || null,
     token: Cookies.get("token") || null
   };
-  setUser = user => {
+  setUser = (user, email) => {
     this.setState({
-      userId: user.id,
+      userId: user._id,
       userEmail: user.email,
       token: user.token
     });
-    Cookies.set("userId", user.id);
-    Cookies.set("userEmail", user.email);
+    Cookies.set("userId", user._id);
+    Cookies.set("userEmail", email);
     Cookies.set("token", user.token);
   };
 
@@ -39,6 +39,7 @@ class App extends Component {
       return (
         <>
           <div className="login">
+            {console.log("this.state", this.state)}
             <span>{this.state.userEmail}</span>
           </div>
           <div className="login">
