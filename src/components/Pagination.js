@@ -2,53 +2,29 @@ import React from "react";
 
 class Pagination extends React.Component {
   state = {
-    currentPage: [1, 2, 3],
-    page: 1
+    page: this.props.currentPage
   };
 
   handleClick = (index, str) => {
-    let newTab = [...this.state.currentPage];
+    let newTab = this.props.pagesTab;
+    // for (let i = 0; i < this.props.totalPages; i++) {
+    //   newTab.push(i + 1);
+    // }
 
-    if (index === this.state.currentPage[0]) {
-      if (this.state.currentPage[0] !== 1) {
-        const currentPageCopy = newTab.map(page => {
-          return (page = page - 1);
-        });
-        this.setState(
-          {
-            page: this.state.currentPage[0],
-            currentPage: currentPageCopy
-          },
-          () => {
-            this.props.moveToPage(this.state.page);
-          }
-        );
-      }
-    }
-    if (index === this.state.currentPage[1]) {
+    // si on clique sur un numéro de page :
+    if (index !== "previous" && index !== "next") {
       this.setState(
         {
-          page: this.state.currentPage[1]
+          page: index
         },
         () => {
-          this.props.moveToPage(this.state.page);
+          this.props.moveToPage(index);
         }
       );
     }
-    if (index === this.state.currentPage[2]) {
-      const currentPageCopy = newTab.map(page => {
-        return (page = page + 1);
-      });
-      this.setState(
-        {
-          page: this.state.currentPage[2],
-          currentPage: currentPageCopy
-        },
-        () => {
-          this.props.moveToPage(this.state.page);
-        }
-      );
-    }
+
+    // si on clique sur previous ou next
+    //  - à condition que this.state.page > 0 et < this.state.currentPage.length
     if (index === "previous" && this.state.page > 1) {
       if (this.state.page === 2) {
         this.setState(
@@ -60,13 +36,13 @@ class Pagination extends React.Component {
           }
         );
       } else {
-        const currentPageCopy = newTab.map(page => {
+        const pagesTabCopy = newTab.map(page => {
           return (page = page - 1);
         });
         this.setState(
           {
             page: this.state.page - 1,
-            currentPage: currentPageCopy
+            pagesTab: pagesTabCopy
           },
           () => {
             this.props.moveToPage(this.state.page);
@@ -74,15 +50,17 @@ class Pagination extends React.Component {
         );
       }
     }
-    if (index === "next") {
+
+    if (index === "next" && this.state.page < this.props.pagesTab.length) {
       if (this.state.page !== 1) {
-        const currentPageCopy = newTab.map(page => {
+        const pagesTabCopy = newTab.map(page => {
           return (page = page + 1);
         });
+
         this.setState(
           {
             page: this.state.page + 1,
-            currentPage: currentPageCopy
+            currentPage: pagesTabCopy
           },
           () => {
             this.props.moveToPage(this.state.page);
@@ -102,6 +80,27 @@ class Pagination extends React.Component {
   };
 
   render() {
+    console.log("this.state.page ", this.state.page);
+    console.log("============== ");
+    const pagesLink = [];
+    for (let i = 0; i < this.props.totalPages; i++) {
+      pagesLink.push(
+        <li key={i} className="page-item">
+          <button
+            aria-pressed="false"
+            onClick={() => this.handleClick(i + 1)}
+            className={
+              i + 1 === this.props.currentPage
+                ? "page-link selected"
+                : "page-link"
+            }
+            disabled={i + 1 === this.props.currentPage ? true : false}
+          >
+            {i + 1}
+          </button>
+        </li>
+      );
+    }
     return (
       <>
         <div className="container">
@@ -116,42 +115,13 @@ class Pagination extends React.Component {
                   href="#"
                   aria-label="Previous"
                 >
-                  <span aria-hidden="true">&laquo;</span>
+                  <span style={{ fontSize: 13 }} aria-hidden="true">
+                    &laquo;
+                  </span>
                 </button>
               </li>
-              <li className="page-item">
-                <button
-                  onClick={() => {
-                    this.handleClick(this.state.currentPage[0]);
-                  }}
-                  className="page-link"
-                  href="#"
-                >
-                  {this.state.currentPage[0]}
-                </button>
-              </li>
-              <li className="page-item">
-                <button
-                  onClick={() => {
-                    this.handleClick(this.state.currentPage[1]);
-                  }}
-                  className="page-link"
-                  href="#"
-                >
-                  {this.state.currentPage[1]}
-                </button>
-              </li>
-              <li className="page-item">
-                <button
-                  onClick={() => {
-                    this.handleClick(this.state.currentPage[2]);
-                  }}
-                  className="page-link"
-                  href="#"
-                >
-                  {this.state.currentPage[2]}
-                </button>
-              </li>
+              {pagesLink}
+
               <li className="page-item">
                 <button
                   onClick={() => {

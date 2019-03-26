@@ -33,7 +33,7 @@ class Publish extends React.Component {
     event.preventDefault();
 
     const response = await axios.post(
-      " https://leboncoin-api.herokuapp.com/api/offer/publish", // api de farid
+      " http://localhost:3100/api/offer/publish", // api locale
       {
         title: this.state.title,
         description: this.state.description,
@@ -71,41 +71,97 @@ class Publish extends React.Component {
     }
 
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            name="title"
-            value={this.state.title}
-            onChange={this.handleChange}
-          />
-          <input
-            type="text"
-            name="description"
-            value={this.state.description}
-            onChange={this.handleChange}
-          />
-          <input
-            type="number"
-            name="price"
-            value={this.state.price}
-            onChange={this.handleChange}
-          />
-
-          <ReactFileReader
-            fileTypes={[".png", ".jpg"]}
-            base64={true}
-            multipleFiles={true} // `false si une seule image`
-            handleFiles={this.handleFiles}
-          >
-            <span>Choisir des images</span>
-          </ReactFileReader>
-
-          {filesArray}
-
-          <input type="submit" value="Publier" />
-        </form>
-      </div>
+      <>
+        <div
+          className="container"
+          style={{
+            display: "flex",
+            backgroundColor: "#666666",
+            color: "white",
+            fontWeight: "bold",
+            marginTop: "30px",
+            height: 45,
+            paddingLeft: "20px",
+            alignItems: "center"
+          }}
+        >
+          Votre annonce
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            backgroundColor: "white",
+            padding: "0 20px 30px 20px"
+          }}
+          className="container"
+        >
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-input-wrapper">
+              <label className="input-label">Titre de l'annonce</label>
+              <input
+                className="form-input"
+                type="text"
+                name="title"
+                value={this.state.title}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-input-wrapper">
+              <label className="input-label">Texte de l'annonce</label>
+              <textarea
+                className="form-input"
+                name="description"
+                cols="30"
+                rows="10"
+                value={this.state.description}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-input-wrapper">
+              <label className="input-label">Prix (€)</label>
+              <input
+                className="form-input"
+                type="text"
+                name="price"
+                value={this.state.price}
+                onChange={this.handleChange}
+              />
+            </div>
+            <ReactFileReader
+              fileTypes={[".png", ".jpg"]}
+              base64={true}
+              multipleFiles={true} // `false si une seule image`
+              handleFiles={this.handleFiles}
+            >
+              <div className="img-btn">
+                <i className="fas fa-camera" />
+                <span>Choisir des images</span>
+              </div>
+            </ReactFileReader>
+            {filesArray.length > 0
+              ? filesArray.map((file, index) => {
+                  const binaryData = file.props.src;
+                  return (
+                    <img
+                      key={index}
+                      className="img-publish"
+                      src={binaryData}
+                      alt=""
+                    />
+                  );
+                })
+              : ""}
+            <div style={{ width: 200 }}>
+              <input
+                className="form-active-btn"
+                type="submit"
+                value="Publier"
+              />
+            </div>
+          </form>
+        </div>
+      </>
     );
   }
 }

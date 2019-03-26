@@ -16,9 +16,10 @@ class App extends Component {
     token: Cookies.get("token") || null
   };
   setUser = (user, email) => {
+    console.log("user ", user, "email : ", email);
     this.setState({
       userId: user._id,
-      userEmail: user.email,
+      userEmail: email,
       token: user.token
     });
     Cookies.set("userId", user._id);
@@ -39,11 +40,11 @@ class App extends Component {
       return (
         <>
           <div className="login">
-            {console.log("this.state", this.state)}
             <span>{this.state.userEmail}</span>
           </div>
           <div className="login">
             <button
+              className="disconnect-btn"
               onClick={() => {
                 // 1 - supprimer les cookies
                 Cookies.remove("userId");
@@ -66,10 +67,28 @@ class App extends Component {
       return (
         <>
           <div className="login">
-            <Link to={"/sign_up"}>Créer un compte</Link>
+            <Link
+              style={{
+                textDecoration: "none",
+                color: "white",
+                fontWeight: "600"
+              }}
+              to={"/sign_up"}
+            >
+              Créer un compte
+            </Link>
           </div>
           <div className="login">
-            <Link to={"/log_in"}>Se connecter</Link>
+            <Link
+              style={{
+                textDecoration: "none",
+                color: "white",
+                fontWeight: "600"
+              }}
+              to={"/log_in"}
+            >
+              Se connecter
+            </Link>
           </div>
         </>
       );
@@ -77,6 +96,9 @@ class App extends Component {
   };
 
   render() {
+    console.log("là ", this.state.userEmail);
+    console.log("là ", this.state.userId);
+    console.log("là ", this.state.token);
     return (
       <BrowserRouter>
         <>

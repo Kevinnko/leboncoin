@@ -1,50 +1,85 @@
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./assets/fonts/Open_Sans/OpenSans-Regular.ttf"); /* IE9 Compat Modes */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+html {
+  --color-leboncoin: #ec6a33;
+}
+body {
+  font-family: "Open Sans";
+  background-color: #f8f8f8;
+}
+.container {
+  padding-left: 0;
+  padding-right: 0;
+}
 .container-fluid {
   display: flex;
-  background-color: #ec6a33;
-  height: 50px;
+  height: 60px;
 }
-
+.header-bg {
+  background-color: var(--color-leboncoin);
+}
 .logo {
   height: 40px;
-  background-color: white;
+  width: 120px;
 }
 .header {
   display: flex;
   justify-content: space-between;
   color: white;
-  font-size: 14px;
+  font-size: 16px;
 }
 .header-left {
   display: flex;
   align-items: center;
-  text-transform: uppercase;
 }
 .header-right {
   display: flex;
   align-items: center;
 }
 .menu {
+  font-size: 16px;
+  line-height: 21px;
   padding: 5px;
+  font-weight: 600;
 }
 .login {
-  border-left: 1px solid white;
-  border-right: 1px solid white;
   padding: 5px;
+  font-size: 14px;
 }
+.disconnect-btn {
+  background: none;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 7px;
+  color: white;
+  cursor: pointer;
+}
+/* Liste des annonces */
 .offers {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 .offer-wrapper {
   display: flex;
+  overflow: hidden;
   width: 100%;
   height: 100%;
-  border: 1px solid grey;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 .offer-img {
+  flex: 2;
   width: 25%;
   height: 140px;
-  padding: 10px;
+  display: flex;
+  justify-content: center;
+  background-color: #cad1d8;
 }
 .product-img {
   background-color: grey;
@@ -52,17 +87,52 @@
   height: 100%;
 }
 .offer-info {
+  background-color: white;
+  flex: 4;
   width: 100%;
   padding: 10px;
+}
+.offer-title {
+  font-size: 20px;
+  line-height: 24px;
+  color: #1a1a1a;
+}
+.offer-price {
+  font-size: 16px;
+  line-height: 18px;
+  color: var(--color-leboncoin);
 }
 .pagination {
   display: flex;
   justify-content: center;
 }
+.page-link {
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  line-height: 25px;
+  color: #4183d7;
+}
+.selected {
+  color: #ffffff;
+  background-color: var(--color-leboncoin);
+  border-radius: 5px;
+}
+.selected:hover {
+  background: var(--color-leboncoin);
+  color: white;
+}
+.selected:focus,
+.page-link:focus {
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
 .card {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+/* Page annonce */
 .offer-body {
   width: 70%;
 }
@@ -71,8 +141,212 @@
   margin-left: auto;
 }
 .creator-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
   background-color: white;
   text-align: center;
   margin-top: 20px;
   box-shadow: 1px 1px 1px 1px #ccc;
+}
+.fa-user {
+  background-color: var(--color-leboncoin);
+  padding: 10px;
+  border-radius: 50%;
+  margin-right: 15px;
+  font-size: 24px;
+  color: white;
+}
+.offer-pic {
+  height: 400px;
+}
+.offer-page-title {
+  font-size: 24px;
+  line-height: 31px;
+  color: #1a1a1a;
+  font-weight: bold;
+}
+.offer-page-price {
+  font-size: 20px;
+  line-height: 30px;
+  color: var(--color-leboncoin);
+  font-weight: bold;
+}
+.offer-desc-title {
+  font-size: 16px;
+  line-height: 24px;
+  color: #1a1a1a;
+  font-weight: bold;
+}
+/* Sign up page */
+.section-title {
+  font-size: 18px;
+  line-height: 27px;
+  color: #1a1a1a;
+  font-weight: bold;
+}
+.signup-separator {
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-leboncoin);
+}
+.form-input-wrapper {
+  width: 100%;
+  margin-top: 20px;
+}
+.form-password-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.form-input {
+  width: inherit;
+  border: 1px solid rgb(202, 209, 217);
+  border-radius: 5px;
+  padding: 10px;
+  outline: none;
+}
+.form-input-empty {
+  width: inherit;
+  border: 1px solid #db4437;
+  border-radius: 5px;
+  padding: 10px;
+  outline: none;
+}
+.form-btn {
+  font-size: 13px;
+  line-height: 19px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  background-color: #e6ebef;
+  color: #a8b4c0;
+  font-weight: bold;
+}
+.form-active-btn {
+  font-size: 13px;
+  line-height: 19px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  background-color: #4183d7;
+  color: #ffffff;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+}
+.form-active-btn:hover {
+  opacity: 0.8;
+}
+.hidden {
+  display: none;
+}
+.input-empty {
+  width: 100%;
+  background-color: #db4437;
+  border-radius: 5px;
+  margin-top: 3px;
+  padding: 8px;
+}
+.msg-empty {
+  color: white;
+  font-size: 13px;
+  line-height: 19px;
+  font-weight: bold;
+}
+.pwd-info {
+  background-color: #d9e6f7;
+  color: black;
+  border-radius: 5px;
+  margin-top: 3px;
+  padding: 10px;
+}
+.pwd-info-text {
+  font-size: 13px;
+  line-height: 19px;
+}
+.input-label {
+  font-size: 13px;
+  line-height: 19px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+.signup-picto {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding-right: 12px;
+  padding-top: 12px;
+}
+
+.signup-why {
+  flex: 6;
+}
+.signup-why h3 {
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: bold;
+}
+.signup-why p {
+  font-size: 13px;
+  line-height: 19px;
+}
+.fa-clock,
+.fa-bell,
+.fa-eye {
+  font-size: 40px;
+  color: #4183d7;
+}
+
+/* footer */
+.footer {
+  margin-top: 140px;
+  background-color: #474747;
+}
+
+/* Login page */
+.login-wrapper {
+  width: 60%;
+  margin: auto;
+}
+.grey-separator {
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 2px;
+  background-color: #ccc;
+}
+.fa-camera {
+  font-size: 18px;
+}
+
+/* Publish page */
+.img-btn {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--color-leboncoin);
+  padding: 10px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  width: 200px;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.img-publish {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  margin: 5px;
 }

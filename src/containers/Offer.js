@@ -9,6 +9,8 @@ class Offer extends React.Component {
     isLoading: true
   };
   render() {
+    console.log("this.state.offer : ", this.state.offer.pictures);
+
     console.log("offer ", this.state.offer);
     if (this.state.isLoading === true) {
       return <p>Page en cours de chargement</p>;
@@ -18,13 +20,13 @@ class Offer extends React.Component {
           <div className="container d-flex">
             <div className="offer-body">
               <div className="card">
-                <Carousel>
+                <Carousel showThumbs={false}>
                   {this.state.offer.pictures.map(pic => {
                     return (
                       <img
                         key={pic.public_id}
                         src={pic.secure_url}
-                        className=""
+                        className="offer-pic"
                         style={{ objectFit: "contain" }}
                         alt="annonce"
                       />
@@ -33,16 +35,21 @@ class Offer extends React.Component {
                 </Carousel>
 
                 <div className="card-body">
-                  <p>{this.state.offer.title}</p>
-                  <p>{this.state.offer.price + " €"}</p>
+                  <p className="offer-page-title">{this.state.offer.title}</p>
+                  <p className="offer-page-price">
+                    {this.state.offer.price + " €"}
+                  </p>
                 </div>
               </div>
-              <h3>Description</h3>
+              <h3 className="offer-desc-title">Description</h3>
               <p>{this.state.offer.description}</p>
             </div>
             <div className="offer-sidebar">
               <div className="creator-wrapper">
-                <p>{this.state.offer.creator.account.username}</p>
+                <i className="fas fa-user" />
+                <span style={{ fontWeight: "bold" }}>
+                  {this.state.offer.creator.account.username}
+                </span>
               </div>
             </div>
           </div>
@@ -53,8 +60,7 @@ class Offer extends React.Component {
   async componentDidMount() {
     try {
       const response = await Axios.get(
-        "https://leboncoin-api.herokuapp.com/api/offer/" +
-          this.props.match.params.offerId
+        "http://localhost:3100/api/offer/" + this.props.match.params.offerId
       );
       this.setState({
         offer: response.data,
