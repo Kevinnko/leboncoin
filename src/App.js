@@ -16,7 +16,6 @@ class App extends Component {
     token: Cookies.get("token") || null
   };
   setUser = (user, email) => {
-    console.log("user ", user, "email : ", email);
     this.setState({
       userId: user._id,
       userEmail: email,
@@ -96,9 +95,6 @@ class App extends Component {
   };
 
   render() {
-    console.log("là ", this.state.userEmail);
-    console.log("là ", this.state.userId);
-    console.log("là ", this.state.token);
     return (
       <BrowserRouter>
         <>

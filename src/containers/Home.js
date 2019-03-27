@@ -26,8 +26,7 @@ class Home extends React.Component {
   };
 
   componentDidMount = async () => {
-    const url =
-      "https://api-leboncoin.herokuapp.com/api/offer/with-count?skip=0&limit=25";
+    const url = "http://localhost:3100/api/offer/with-count?skip=0&limit=25";
     const response = await axios.get(url);
     const offers = response.data.offers;
     const count = response.data.count;

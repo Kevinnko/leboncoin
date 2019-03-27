@@ -57,8 +57,7 @@ class Offer extends React.Component {
   async componentDidMount() {
     try {
       const response = await Axios.get(
-        "https://api-leboncoin.herokuapp.com/api/offer/" +
-          this.props.match.params.offerId
+        "http://localhost:3100/api/offer/" + this.props.match.params.offerId
       );
       this.setState({
         offer: response.data,
