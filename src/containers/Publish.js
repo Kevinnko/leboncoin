@@ -30,23 +30,31 @@ class Publish extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-
-    const response = await axios.post(
-      " https://api-leboncoin.herokuapp.com/api/offer/publish",
-      {
-        title: this.state.title,
-        description: this.state.description,
-        price: Number(this.state.price),
-        files: this.state.files
-      },
-      {
-        headers: {
-          authorization: "Bearer " + this.props.getUser().token
+    // Si les champs ne sont pas remplis, retourner un message à l'utilisateur
+    if (
+      this.state.title.length < 1 ||
+      this.state.description.length < 1 ||
+      this.state.files.length < 1
+    ) {
+      alert("Veuillez remplir tous les champs et ajouter une image.");
+    } else {
+      const response = await axios.post(
+        " https://api-leboncoin.herokuapp.com/api/offer/publish",
+        {
+          title: this.state.title,
+          description: this.state.description,
+          price: Number(this.state.price),
+          files: this.state.files
+        },
+        {
+          headers: {
+            authorization: "Bearer " + this.props.getUser().token
+          }
         }
+      );
+      if (response.data) {
+        this.props.history.push(`/offer/${response.data._id}`);
       }
-    );
-    if (response.data) {
-      this.props.history.push(`/offer/${response.data._id}`);
     }
   };
 
