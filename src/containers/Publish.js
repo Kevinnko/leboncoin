@@ -32,7 +32,7 @@ class Publish extends React.Component {
     event.preventDefault();
 
     const response = await axios.post(
-      " http://localhost:3100/api/offer/publish",
+      " https://api-leboncoin.herokuapp.com/api/offer/publish",
       {
         title: this.state.title,
         description: this.state.description,

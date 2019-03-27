@@ -10,10 +10,13 @@ class LogIn extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    const response = await axios.post("http://localhost:3100/api/user/log_in", {
-      email: this.state.email,
-      password: this.state.password
-    });
+    const response = await axios.post(
+      "https://api-leboncoin.herokuapp.com/api/user/log_in",
+      {
+        email: this.state.email,
+        password: this.state.password
+      }
+    );
 
     if (response.data.token) {
       this.props.history.push("/");
