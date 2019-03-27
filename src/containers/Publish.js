@@ -11,7 +11,6 @@ class Publish extends React.Component {
   };
 
   handleFiles = files => {
-    // console.log(files);
     const newFiles = [...this.state.files, ...files.base64];
     this.setState({
       files: newFiles
@@ -33,7 +32,7 @@ class Publish extends React.Component {
     event.preventDefault();
 
     const response = await axios.post(
-      " http://localhost:3100/api/offer/publish", // api locale
+      " https://api-leboncoin.herokuapp.com/api/offer/publish",
       {
         title: this.state.title,
         description: this.state.description,
@@ -49,7 +48,6 @@ class Publish extends React.Component {
     if (response.data) {
       this.props.history.push(`/offer/${response.data._id}`);
     }
-    console.log("response data :", response.data);
   };
 
   render() {

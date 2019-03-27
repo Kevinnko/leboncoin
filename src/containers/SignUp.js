@@ -19,18 +19,15 @@ class SignUp extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    console.log("c'est submit");
 
     const response = await axios.post(
-      "http://localhost:3100/api/user/sign_up", // api locale
+      "https://api-leboncoin.herokuapp.com/api/user/sign_up", // api locale
       {
         email: this.state.email,
         username: this.state.username,
         password: this.state.password
       }
     );
-    console.log("response.data", response.data);
-    console.log("this.state.email", this.state.email);
     if (response.data.token) {
       this.props.setUser(response.data, this.state.email); // pour modifier l'état du parent app
       this.props.history.push("/");
@@ -69,7 +66,6 @@ class SignUp extends React.Component {
           } else if (name === "email") {
             // Valider le format de l'adresse email (text@text.text) :
             if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-              console.log("toto");
               this.setState({
                 emptyMail: false,
                 emailVerified: true

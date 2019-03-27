@@ -10,11 +10,14 @@ class LogIn extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    const response = await axios.post("http://localhost:3100/api/user/log_in", {
-      email: this.state.email,
-      password: this.state.password
-    });
-    console.log("response.data.token", response.data.token);
+    const response = await axios.post(
+      "https://api-leboncoin.herokuapp.com/api/user/log_in",
+      {
+        email: this.state.email,
+        password: this.state.password
+      }
+    );
+
     if (response.data.token) {
       this.props.history.push("/");
       this.props.setUser(response.data, this.state.email); // pour modifier l'état du parent app

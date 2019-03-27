@@ -9,9 +9,6 @@ class Offer extends React.Component {
     isLoading: true
   };
   render() {
-    console.log("this.state.offer : ", this.state.offer.pictures);
-
-    console.log("offer ", this.state.offer);
     if (this.state.isLoading === true) {
       return <p>Page en cours de chargement</p>;
     } else {
@@ -60,7 +57,8 @@ class Offer extends React.Component {
   async componentDidMount() {
     try {
       const response = await Axios.get(
-        "http://localhost:3100/api/offer/" + this.props.match.params.offerId
+        "https://api-leboncoin.herokuapp.com/api/offer/" +
+          this.props.match.params.offerId
       );
       this.setState({
         offer: response.data,

@@ -16,23 +16,21 @@ class Home extends React.Component {
   };
 
   updatePagesNum = () => {
-    console.log("this.state.totalPages", this.state.totalPages);
     let newTab = [];
     for (let i = 0; i < this.state.totalPages; i++) {
       newTab.push(i + 1);
     }
-    console.log("newTab ", newTab);
     this.setState({
       pagesTab: newTab
     });
   };
 
   componentDidMount = async () => {
-    const url = "http://localhost:3100/api/offer/with-count?skip=0&limit=25";
+    const url =
+      "https://api-leboncoin.herokuapp.com/api/offer/with-count?skip=0&limit=25";
     const response = await axios.get(url);
     const offers = response.data.offers;
     const count = response.data.count;
-    console.log("response.data ", response.data);
     this.setState(
       {
         currentPageOffers: offers,
@@ -41,7 +39,6 @@ class Home extends React.Component {
       },
       () => {
         this.updatePagesNum();
-        // console.log("ici", this.state.currentPageOffers);
       }
     );
   };
@@ -50,7 +47,7 @@ class Home extends React.Component {
     const num = (index - 1) * limit;
 
     const current = await axios.get(
-      "http://localhost:3100/api/offer/with-count?skip=" +
+      "https://api-leboncoin.herokuapp.com/api/offer/with-count?skip=" +
         num +
         "&limit=" +
         limit
@@ -64,7 +61,6 @@ class Home extends React.Component {
   };
 
   render() {
-    console.log("currentPageOffers : ", this.state.currentPageOffers);
     return (
       <>
         <Offers offers={this.state.currentPageOffers} />

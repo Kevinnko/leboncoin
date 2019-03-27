@@ -7,9 +7,6 @@ class Pagination extends React.Component {
 
   handleClick = (index, str) => {
     let newTab = this.props.pagesTab;
-    // for (let i = 0; i < this.props.totalPages; i++) {
-    //   newTab.push(i + 1);
-    // }
 
     // si on clique sur un numéro de page :
     if (index !== "previous" && index !== "next") {
@@ -80,8 +77,6 @@ class Pagination extends React.Component {
   };
 
   render() {
-    console.log("this.state.page ", this.state.page);
-    console.log("============== ");
     const pagesLink = [];
     for (let i = 0; i < this.props.totalPages; i++) {
       pagesLink.push(

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 class Offers extends React.Component {
   render() {
     const offers = this.props.offers;
-    console.log("offers ", offers);
     return (
       <>
         <div className="container p-2 offers">
