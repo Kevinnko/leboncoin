@@ -127,7 +127,7 @@ class App extends Component {
                 if (this.state.token) {
                   return <Publish getUser={this.getUser} {...props} />;
                 } else {
-                  return <Redirect to="/sign_up" />;
+                  return <Redirect to="/log_in" />;
                 }
               }}
             />
